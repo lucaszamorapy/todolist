@@ -29,6 +29,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
+          :to="item.to"
           link
         >
           <v-list-item-icon>
@@ -49,7 +50,7 @@
     </v-app-bar>
 
     <v-main>
-      <!--  -->
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -58,8 +59,8 @@
   export default {
     data: () => ({ drawer: null,
        items: [
-          { title: 'Suas tarefas', icon: 'mdi-view-dashboard' },
-          { title: 'Sobre', icon: 'mdi-help-box' },
+          { title: 'Suas tarefas', icon: 'mdi-view-dashboard', to: '/' },
+          { title: 'Sobre', icon: 'mdi-help-box',  to: '/sobre' },
         ],
      }),
   }
