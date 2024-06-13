@@ -1,12 +1,5 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-navigation-drawer
-      v-model="drawer"
-      app
-    >
-      
-    </v-navigation-drawer> -->
-
     <v-navigation-drawer  v-model="drawer"
       app>
       <v-list-item>
@@ -43,10 +36,37 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <!-- <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar> -->
+
+    <v-app-bar
+      color="dark"
+      app
+      dark
+      prominent
+      src="https://picsum.photos/1920/1080?random"
+      fade-img-on-scroll
+    >
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Title</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
