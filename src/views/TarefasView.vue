@@ -10,12 +10,13 @@
 
     <v-list flat subheader>
       <v-list-item-group multiple active-class="">
-        <div v-for="(tarefa, index) in tarefas" :key="index">
+        <div v-for="(tarefa, index) in $store.state.tarefas" :key="index">
           <TarefaLista
             :tarefa="tarefa"
             @update-concluido="updateTarefaConcluido(index)"
           />
         </div>
+        <!--Passo para meu component com o @ -->
       </v-list-item-group>
     </v-list>
   </div>
@@ -32,27 +33,15 @@ export default {
   data() {
     return {
       campoInput: null,
-      tarefas: [
-        {
-          titulo: "Ir ao mercado",
-          concluido: false,
-        },
-        {
-          titulo: "Comprar ração",
-          concluido: false,
-        },
-      ],
     };
   },
   methods: {
     handleAddTarefa() {
-      if (this.campoInput) {
-        this.tarefas.push({ titulo: this.campoInput, concluido: false });
-        this.campoInput = null; // Limpar o campo de input após adicionar
-      }
+      this.$store.commit("addTarefa", this.campoInput);
+      this.campoInput = null;
     },
     updateTarefaConcluido(index) {
-      this.tarefas[index].concluido = !this.tarefas[index].concluido;
+      this.tarefas[index].concluido = !this.tarefas[index].concluido; //Estou pegando pelo index de cada tarefa e dizendo ao contrário dele (como se fosse o !state no react)
     },
   },
 };

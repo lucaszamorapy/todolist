@@ -4,6 +4,7 @@
       :class="{ 'blue lighten-4': tarefa.concluido }"
       @click="toggleConcluido"
     >
+      <!--toggleConcluido ativa a funcao emitida que foi passada do componente pai, que seria o método do contrário-->
       <template v-slot:default="{}">
         <v-list-item-action>
           <v-checkbox :input-value="tarefa.concluido"></v-checkbox>
