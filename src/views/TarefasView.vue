@@ -16,7 +16,6 @@
             @update-concluido="updateTarefaConcluido(index)"
           />
         </div>
-        <!--Passo para meu component com o @ -->
       </v-list-item-group>
     </v-list>
   </div>
@@ -41,7 +40,7 @@ export default {
       this.campoInput = null;
     },
     updateTarefaConcluido(index) {
-      this.tarefas[index].concluido = !this.tarefas[index].concluido; //Estou pegando pelo index de cada tarefa e dizendo ao contrário dele (como se fosse o !state no react)
+      this.$store.commit("toggleConcluido", index);
     },
   },
 };

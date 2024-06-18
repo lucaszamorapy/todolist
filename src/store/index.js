@@ -17,14 +17,19 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     addTarefa(state, titulo) {
-      // titulo se torna change do v-model campoInput
       if (titulo) {
         state.tarefas.push({
           id: new Date().getTime(),
           titulo,
           concluido: false,
-        }); // Limpar o campo de input após adicionar
+        });
       }
+    },
+    toggleConcluido(state, index) {
+      state.tarefas[index].concluido = !state.tarefas[index].concluido;
+    },
+    removeTarefa(state, id) {
+      state.tarefas = state.tarefas.filter((tarefa) => tarefa.id !== id);
     },
   },
   actions: {},
