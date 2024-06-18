@@ -25,11 +25,20 @@ export default new Vuex.Store({
         });
       }
     },
-    toggleConcluido(state, index) {
+    toggleConcluidoMutation(state, index) {
       state.tarefas[index].concluido = !state.tarefas[index].concluido;
     },
-    removeTarefa(state, id) {
+    deleteTarefa(state, id) {
       state.tarefas = state.tarefas.filter((tarefa) => tarefa.id !== id);
+    },
+    editTarefa(state, novaTarefa) {
+      const index = state.tarefas.findIndex(
+        (tarefa) => tarefa.id === novaTarefa.id
+      );
+      console.log(index);
+      if (index !== null) {
+        state.tarefas[index].titulo = novaTarefa.titulo;
+      }
     },
   },
   actions: {},

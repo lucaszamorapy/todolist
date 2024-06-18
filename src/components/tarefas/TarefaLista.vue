@@ -16,11 +16,11 @@
             {{ tarefa.titulo }}
           </v-list-item-title>
         </v-list-item-content>
-
+        <TarefaMenu :tarefa="tarefa" />
         <v-list-item-action>
-          <v-btn icon @click.stop="handleRemoveTarefa(tarefa.id)">
+          <!-- <v-btn icon @click.stop="handleRemoveTarefa(tarefa.id)">
             <v-icon color="red lighten-1">mdi-trash-can</v-icon>
-          </v-btn>
+          </v-btn> -->
         </v-list-item-action>
       </template>
     </v-list-item>
@@ -29,7 +29,9 @@
 </template>
 
 <script>
+import TarefaMenu from "../tarefas/TarefaMenu.vue";
 export default {
+  components: { TarefaMenu },
   props: ["tarefa"],
   methods: {
     toggleConcluido() {

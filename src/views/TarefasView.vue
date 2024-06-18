@@ -40,7 +40,7 @@ export default {
       this.campoInput = null;
     },
     updateTarefaConcluido(index) {
-      this.$store.commit("toggleConcluido", index);
+      this.$store.commit("toggleConcluidoMutation", index);
     },
   },
 };
