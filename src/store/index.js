@@ -1,46 +1,63 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import Localbase from "localbase";
+let db = new Localbase("db");
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    tarefas: [
-      {
-        id: 1,
-        titulo: "Ir ao mercado",
-        concluido: false,
-      },
-      { id: 2, titulo: "Comprar ração", concluido: false },
-    ],
+    tarefas: [],
   },
   getters: {},
   mutations: {
-    addTarefa(state, titulo) {
-      if (titulo) {
-        state.tarefas.push({
-          id: new Date().getTime(),
-          titulo,
-          concluido: false,
-        });
-      }
+    setTarefas(state, tarefas) {
+      state.tarefas = tarefas;
     },
     toggleConcluidoMutation(state, index) {
       state.tarefas[index].concluido = !state.tarefas[index].concluido;
     },
-    deleteTarefa(state, id) {
-      state.tarefas = state.tarefas.filter((tarefa) => tarefa.id !== id);
+  },
+  actions: {
+    async getTarefa({ commit }) {
+      db.collection("tarefas")
+        .get()
+        .then((tarefasDB) => {
+          commit("setTarefas", tarefasDB);
+        });
     },
-    editTarefa(state, novaTarefa) {
-      const index = state.tarefas.findIndex(
-        (tarefa) => tarefa.id === novaTarefa.id
+    async createTarefa({ dispatch }, titulo) {
+      db.collection("tarefas")
+        .add({
+          id: new Date().getTime(),
+          titulo,
+          concluido: false,
+        })
+        .then(() => {
+          dispatch("getTarefa");
+        });
+    },
+    async updateTarefa({ dispatch }, novaTarefa) {
+      db.collection("tarefas").doc(
+        { id: novaTarefa.id }
+          .update({
+            titulo: novaTarefa.titulo,
+          })
+          .then(() => {
+            dispatch("getTarefa");
+          })
       );
-      console.log(index);
-      if (index !== null) {
-        state.tarefas[index].titulo = novaTarefa.titulo;
-      }
+    },
+    async deleteTarefa({ dispatch }, id) {
+      await db
+        .collection("tarefas")
+        .doc({ id: id })
+        .delete()
+        .then(() => {
+          dispatch("getTarefa");
+        });
     },
   },
-  actions: {},
   modules: {},
 });

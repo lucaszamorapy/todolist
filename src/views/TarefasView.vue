@@ -34,9 +34,13 @@ export default {
       campoInput: null,
     };
   },
+  created() {
+    this.$store.dispatch("getTarefa");
+  },
   methods: {
     handleAddTarefa() {
-      this.$store.commit("addTarefa", this.campoInput);
+      // this.$store.commit("addTarefa", this.campoInput);
+      this.$store.dispatch("createTarefa", this.campoInput);
       this.campoInput = null;
     },
     updateTarefaConcluido(index) {

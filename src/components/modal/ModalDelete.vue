@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     handleDeleta() {
-      this.$store.commit("deleteTarefa", this.tarefa.id);
+      this.$store.dispatch("deleteTarefa", this.tarefa.id);
       this.$emit("fechaModal");
     },
   },
