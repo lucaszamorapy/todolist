@@ -1,14 +1,24 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Lista de Tarefas Diárias
-          </v-list-item-title>
-          <v-list-item-subtitle> Minhas Tarefas </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-img
+        src="https://picsum.photos/1920/1080?random"
+        dark
+        class="pt-5 text-center"
+      >
+        <v-avatar size="100">
+          <img src="./assets/perfil.jpg" alt="John" />
+        </v-avatar>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="text-h6">
+              Lista de Tarefas Diárias
+            </v-list-item-title>
+            <v-list-item-subtitle> Minhas Tarefas </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-img>
 
       <v-divider></v-divider>
 
@@ -67,7 +77,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
+    drawer: true,
     items: [
       { title: "Suas tarefas", icon: "mdi-view-dashboard", to: "/" },
       { title: "Sobre", icon: "mdi-help-box", to: "/sobre" },
