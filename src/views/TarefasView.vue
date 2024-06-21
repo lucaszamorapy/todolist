@@ -1,20 +1,23 @@
 <template>
   <div>
-    <v-col cols="12">
-      <v-text-field
-        v-model="campoInput"
-        label="Qual sua tarefa de hoje?"
-        @keyup.enter="handleAddTarefa"
-      ></v-text-field>
-    </v-col>
-
     <v-list flat subheader>
       <v-list-item-group multiple active-class="">
-        <div v-for="(tarefa, index) in $store.state.tarefas" :key="index">
-          <TarefaLista
-            :tarefa="tarefa"
-            @update-concluido="updateTarefaConcluido(index)"
-          />
+        <div
+          v-if="$store.state.tarefas.length === 0"
+          class="mt-16 animate__animated animate__bounceInUp"
+        >
+          <center>
+            <v-icon size="100" color="primary">mdi-check</v-icon>
+            <p class="text-h6 primary--text">Nenhuma tarefa</p>
+          </center>
+        </div>
+        <div v-else>
+          <div v-for="(tarefa, index) in $store.state.tarefas" :key="index">
+            <TarefaLista
+              :tarefa="tarefa"
+              @update-concluido="updateTarefaConcluido(index)"
+            />
+          </div>
         </div>
       </v-list-item-group>
     </v-list>
@@ -29,23 +32,8 @@ export default {
   components: {
     TarefaLista,
   },
-  data() {
-    return {
-      campoInput: null,
-    };
-  },
   created() {
     this.$store.dispatch("getTarefa");
-  },
-  methods: {
-    handleAddTarefa() {
-      // this.$store.commit("addTarefa", this.campoInput);
-      this.$store.dispatch("createTarefa", this.campoInput);
-      this.campoInput = null;
-    },
-    updateTarefaConcluido(index) {
-      this.$store.commit("toggleConcluidoMutation", index);
-    },
   },
 };
 </script>

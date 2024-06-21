@@ -50,24 +50,10 @@
       fade-img-on-scroll
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Title</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-toolbar-title>
+        <InputTarefa />
+      </v-toolbar-title>
     </v-app-bar>
-
     <v-main>
       <router-view />
     </v-main>
@@ -75,9 +61,11 @@
 </template>
 
 <script>
+import InputTarefa from "./components/InputTarefa.vue";
 export default {
+  components: { InputTarefa },
   data: () => ({
-    drawer: true,
+    drawer: null,
     items: [
       { title: "Suas tarefas", icon: "mdi-view-dashboard", to: "/" },
       { title: "Sobre", icon: "mdi-help-box", to: "/sobre" },
